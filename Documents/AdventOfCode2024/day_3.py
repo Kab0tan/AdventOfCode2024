@@ -6,7 +6,7 @@ lines = f.readlines()
 
 #-----------part 1--------------------------------------
 
-pattern = r"mul\(([A-Za-z0-9_]+),([A-Za-z0-9_]+)\)"
+pattern = r"mul\((\d+),(\d+)\)"
 s = 0
 for line in lines:
     results = re.findall(pattern, line)
@@ -16,7 +16,7 @@ print(s)
 #-----------part 2--------------------------------------
 
 
-pattern2 = r"mul\(([A-Za-z0-9_]+),([A-Za-z0-9_]+)\)|don't\(\)|do\(\)"
+pattern2 = r"mul\((\d+),(\d+)\)|don't\(\)|do\(\)"
 s2 = 0
 curr = 0
 for line in lines:
