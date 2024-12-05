@@ -4,11 +4,8 @@ lines = [line.strip() for line in lines]
 
 divider = lines.index('')
 
-rules = lines[:divider]
-updates= lines[divider+1:]
-
-rules = [r.split('|') for r in rules]
-updates = [(u).split(',') for u in updates]
+rules = [r.split('|') for r in lines[:divider]]
+updates = [(u).split(',') for u in lines[divider+1:]]
 
 #-----------part 1--------------------------------------
 middle_page = []
