@@ -33,8 +33,8 @@ while (0 <= x + dir[0] < a) and (0 <= y + dir[1] < b):
         dir = directions[curr][0]
         curr = directions[curr][1]
 visited = list(visited.keys())
-print(len(visited))
-print(visited)
+# print(len(visited))
+# print(visited)
 
 # -----------part 2--------------------------------------
 
@@ -105,26 +105,50 @@ print(visited)
 #             m[x, y] = "+"
 #         visited2.add((x, y))
 
-print()
+
+def can_loop(right_view, arrow_symbol ):
+    if arrow_symbol in right_view : #we are looking at the rigth, if there is a 0, it means on the right there is a point we already visited
+        if '#' in right_view :
+            index_hashtag = np.where(right_view == '#')[0][0]
+            index_arrow = np.where(right_view == arrow_symbol)[0][0]
+            if index_arrow < index_hashtag:
+                return True
+            return False
+        return True
+    return False
+
 m = matrix.copy()
 visited2 = {}
-direction_pair = (1,0)
+direction_pair = (-1,0)
 curr_symbol = "^"
-for coor in visited:
-    x,y = coor
-    print(x,y, curr_symbol, direction_pair)
+x, y = xi, yi
+count_obstacles = 0
+while (0 <= x + dir[0] < a) and (0 <= y + dir[1] < b):
     visited2[(x,y)] = None
+    if curr_symbol == "^":
+        m[x,y] = '^'
+        #we are looking at the rigth, if there is a 0, it means on the right there is a point we already visited
+        right_view = m[x,y:]
+        if can_loop(m[x,y:], '>'):
+            print("we can add an obstacle at ", x+1,y)
+            count_obstacles += 1
+    elif curr_symbol == ">":
+        m[x,y] = '>'
+        if can_loop(m[x:,y], 'v'):
+            print("we can add an obstacle at ", x,y+1)
+            count_obstacles += 1
+    elif curr_symbol == "v":
+        m[x,y] = 'v'
+        if can_loop(m[x,:y][::-1], '<'):
+            print("we can add an obstacle at ", x+1,y)
+            count_obstacles += 1
+    elif curr_symbol == "<":
+        m[x,y] = '<'
+        if can_loop(m[:x,y][::-1], '^'):
+            print("we can add an obstacle at ", x,y-1)
+            count_obstacles += 1
     if m[x+direction_pair[0],y+direction_pair[1]] == "#":
         direction_pair = directions[curr_symbol][0]
-        curr_symbol = directions[m[x,y]][1]
-    m[x,y] = 0
-    if curr_symbol == "^":
-        print(m[x,y:])
-        # if 0 in m[x,y:] : #we are looking at the rigth, if there is a 0, it means on the right there is a point we already visited
-    elif curr_symbol == ">":
-        print(m[x:,y])
-    elif curr_symbol == "v":
-        print(m[:x+1,y])
-    elif curr_symbol == "<":
-        print(m[:,:y+1])         
-            
+        curr_symbol = directions[curr_symbol][1]
+    x, y = x + direction_pair[0], y + direction_pair[1]
+print(count_obstacles)
