@@ -37,8 +37,6 @@ for i, row in enumerate(lines):
 print(score)
 #-----------part 2--------------------------------------
 
-
-
 def check_neighbors2(i,j,a,b, rating):
     curr = lines[i][j]
     n = neighbors(i,j,a,b)

@@ -19,7 +19,6 @@ def convert_to_blocks(line):
     return blocks
 
 res = convert_to_blocks(lines[0])
-print("Before compacting: ",''.join([str(x) for x in res]))
 s = 0
 reverse_index = len(res)-1
 for i, item in enumerate(res):
@@ -33,11 +32,9 @@ for i, item in enumerate(res):
         res[i] = res[reverse_index]
         s+= i*res[i]
         res[reverse_index] = '.'
-        print("Current res: ",''.join([str(x) for x in res]))
         reverse_index -= 1
     else:
         s+= i*item
-print("Current res: ",''.join([str(x) for x in res]))
 print(s)
 
 s2= 0
@@ -46,6 +43,6 @@ for j, item in enumerate(res):
         s2+= j*item
 print(s2)       
 
-
+#6382875730645
 
 #-----------part 2--------------------------------------
