@@ -3,8 +3,6 @@ from queue import PriorityQueue
 f = open('day_18_input.txt','r')
 lines = f.readlines()
 
-
-
 #-----------part 1--------------------------------------
 
 def create_map(nb_bytes, shape):
