@@ -5,8 +5,6 @@ f = open('day_20_input.txt','r')
 lines = f.readlines()
 maze = [ list(x.strip()) for x in lines]
 
-# for row in maze: 
-#     print(''.join(row))
 #-----------part 1--------------------------------------
 
 
